@@ -54,3 +54,8 @@ desktop.ini
 .obsidian/workspace*.json
 .obsidian/cache/
 .trash/
+
+# ── 本机工具 / 协作配置（不提交到 GitHub） ───────
+.claude/
+.dsh/
+.obsidian/
