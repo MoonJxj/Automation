@@ -1,0 +1,62 @@
+{
+  "controllers": [
+    {
+      "id": 1,
+      "name": "模拟调试卡",
+      "brand": "Sim",
+      "controllerNo": 0,
+      "connectionType": "PciCard",
+      "isEnabled": true
+    }
+  ],
+  "axes": [
+    {
+      "id": 10,
+      "controllerConfigId": 1,
+      "axisNo": 0,
+      "stationId": 1,
+      "name": "X 轴（工位1·模拟）",
+      "unit": "mm",
+      "defaultVelocity": 10.0,
+      "isEnabled": true
+    },
+    {
+      "id": 11,
+      "controllerConfigId": 1,
+      "axisNo": 1,
+      "stationId": 2,
+      "name": "Y 轴（工位2·模拟）",
+      "unit": "mm",
+      "defaultVelocity": 10.0,
+      "isEnabled": true
+    }
+  ],
+  "cylinders": [
+    {
+      "elementId": "Cyl-1",
+      "name": "夹紧气缸（工位1·模拟）",
+      "controllerConfigId": 1,
+      "controllerNo": 0,
+      "stationId": 1,
+      "extendOutput": 0,
+      "retractOutput": 1,
+      "extendedInput": 0,
+      "retractedInput": 1,
+      "actionTimeoutSeconds": 2.0,
+      "isEnabled": true
+    },
+    {
+      "elementId": "Cyl-2",
+      "name": "顶升气缸（工位2·模拟）",
+      "controllerConfigId": 1,
+      "controllerNo": 0,
+      "stationId": 2,
+      "extendOutput": 2,
+      "retractOutput": 3,
+      "extendedInput": 2,
+      "retractedInput": 3,
+      "actionTimeoutSeconds": 2.0,
+      "isEnabled": true
+    }
+  ]
+}

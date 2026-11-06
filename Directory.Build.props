@@ -1,0 +1,22 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <!-- 所有类库的默认目标框架。App 会覆盖为 net8.0-windows。
+         迁移到 .NET 10 只需改这一行（App 的覆盖行需同步修改）。 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>EquipmentMonitor</Authors>
+    <Product>工业设备监控上位机</Product>
+  </PropertyGroup>
+
+</Project>

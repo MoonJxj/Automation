@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    外部适配样例：只引用 Core，不引用 Infrastructure。
+    用途：验证第三方设备适配器不需要 NModbus/SqlSugar/Serilog 也能接入框架。
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>EquipmentMonitor.AxisAdapter.Sample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EquipmentMonitor.Core\EquipmentMonitor.Core.csproj" />
+  </ItemGroup>
+
+</Project>

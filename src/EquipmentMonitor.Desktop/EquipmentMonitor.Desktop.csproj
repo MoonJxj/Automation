@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    新框架的桌面宿主（R1：主壳 + 只读元件总览；R2 在此之上加伺服操作台）。
+    命名规则（docs/conventions.md §1）：
+      · 项目名 = EquipmentMonitor.<模块>，文件夹名 = 项目名；
+      · 一个项目一个根命名空间，禁止在模块内使用与模块名不符的命名空间。
+    为什么引用 Core + Infrastructure 而不是 Common：
+      Common 由 Infrastructure 传递引用；UI 直接引它等于绕过分层。
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>EquipmentMonitor.Desktop</RootNamespace>
+    <ApplicationDefaultFont>Microsoft YaHei UI, 9pt</ApplicationDefaultFont>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EquipmentMonitor.Core\EquipmentMonitor.Core.csproj" />
+    <ProjectReference Include="..\EquipmentMonitor.Infrastructure\EquipmentMonitor.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AntdUI" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+
+  <!--
+    控件别名（阶段十策略 2）：AntdUI 与 WinForms 大面积重名，
+    在调用点用 AntdXxx 前缀标明来源，避免 CS0104 散落各文件。
+  -->
+  <ItemGroup>
+    <Using Include="AntdUI.Button" Alias="AntdButton" />
+    <Using Include="AntdUI.InputNumber" Alias="AntdInputNumber" />
+    <Using Include="AntdUI.Label" Alias="AntdLabel" />
+    <Using Include="AntdUI.Select" Alias="AntdSelect" />
+    <Using Include="AntdUI.Switch" Alias="AntdSwitch" />
+    <Using Include="AntdUI.Table" Alias="AntdTable" />
+    <Using Include="AntdUI.Column" Alias="AntdColumn" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 轴控配置只有一个真相源：链接 Infrastructure 里的样例，不在两处各放一份。 -->
+    <None Include="..\EquipmentMonitor.Infrastructure\Configuration\axis-framework.json"
+          Link="axis-framework.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 让 VS 把 Designer 文件折叠到窗体/控件下，并可用“查看设计器”打开。 -->
+    <Compile Update="Forms\MainForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\MainForm.Designer.cs"><DependentUpon>MainForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\SignInForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\SignInForm.Designer.cs"><DependentUpon>SignInForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\ElementOverviewPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\ElementOverviewPage.Designer.cs"><DependentUpon>ElementOverviewPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\ElementOperationPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\ElementOperationPage.Designer.cs"><DependentUpon>ElementOperationPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\CylinderOverviewPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\CylinderOverviewPage.Designer.cs"><DependentUpon>CylinderOverviewPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\CylinderOperationPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\CylinderOperationPage.Designer.cs"><DependentUpon>CylinderOperationPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\AutoMonitorPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\AutoMonitorPage.Designer.cs"><DependentUpon>AutoMonitorPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\ManualOperationPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\ManualOperationPage.Designer.cs"><DependentUpon>ManualOperationPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\AlarmInfoPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\AlarmInfoPage.Designer.cs"><DependentUpon>AlarmInfoPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\FunctionSelectionPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\FunctionSelectionPage.Designer.cs"><DependentUpon>FunctionSelectionPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\StationBypassDialog.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\StationBypassDialog.Designer.cs"><DependentUpon>StationBypassDialog.cs</DependentUpon></Compile>
+    <Compile Update="Forms\OperationHelpDialog.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\OperationHelpDialog.Designer.cs"><DependentUpon>OperationHelpDialog.cs</DependentUpon></Compile>
+    <Compile Update="Forms\UserManagementPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\UserManagementPage.Designer.cs"><DependentUpon>UserManagementPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\ParameterSettingsPage.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\ParameterSettingsPage.Designer.cs"><DependentUpon>ParameterSettingsPage.cs</DependentUpon></Compile>
+    <Compile Update="Forms\UserEditDialog.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\UserEditDialog.Designer.cs"><DependentUpon>UserEditDialog.cs</DependentUpon></Compile>
+    <Compile Update="Forms\PasswordDialog.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\PasswordDialog.Designer.cs"><DependentUpon>PasswordDialog.cs</DependentUpon></Compile>
+    <Compile Update="Controls\AxisOperationPanel.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\AxisOperationPanel.Designer.cs"><DependentUpon>AxisOperationPanel.cs</DependentUpon></Compile>
+    <Compile Update="Controls\JogModePanel.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\JogModePanel.Designer.cs"><DependentUpon>JogModePanel.cs</DependentUpon></Compile>
+    <Compile Update="Controls\PositionModePanel.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\PositionModePanel.Designer.cs"><DependentUpon>PositionModePanel.cs</DependentUpon></Compile>
+    <Compile Update="Controls\HomeModePanel.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\HomeModePanel.Designer.cs"><DependentUpon>HomeModePanel.cs</DependentUpon></Compile>
+    <Compile Update="Controls\CylinderOperationPanel.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\CylinderOperationPanel.Designer.cs"><DependentUpon>CylinderOperationPanel.cs</DependentUpon></Compile>
+    <Compile Update="Controls\ParameterEditorControl.cs"><SubType>UserControl</SubType></Compile>
+    <Compile Update="Controls\ParameterEditorControl.Designer.cs"><DependentUpon>ParameterEditorControl.cs</DependentUpon></Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="EquipmentMonitor.Desktop.Tests" />
+  </ItemGroup>
+
+</Project>

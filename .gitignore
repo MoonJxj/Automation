@@ -1,0 +1,56 @@
+# ── 构建 / 发布产物 ──────────────────────────────
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+publish/
+*.nupkg
+*.snupkg
+*.binlog
+
+# ── Visual Studio / Rider ───────────────────────
+.vs/
+.idea/
+*.user
+*.suo
+*.rsuser
+*.DotSettings.user
+*.sln.docstates
+
+# ── 测试 / 覆盖率 ───────────────────────────────
+[Tt]est[Rr]esults/
+TestResults*/
+*.trx
+*.coverage
+coverage.*.xml
+coverage.json
+*.received.*
+
+# ── 运行期 / 现场数据（不提交） ─────────────────
+data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# ── 凭据 / 本机配置 ─────────────────────────────
+*.pfx
+*.snk
+secrets.json
+appsettings.*.local.json
+.env
+.env.*
+
+# ── 临时文件 / 工具产物 ─────────────────────────
+.tmp/
+.acl-recovery/
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ── Obsidian（本机工作区状态） ──────────────────
+.obsidian/workspace*.json
+.obsidian/cache/
+.trash/

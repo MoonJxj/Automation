@@ -1,0 +1,32 @@
+## 构建产物
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+
+## Visual Studio / Rider
+.vs/
+.idea/
+*.DotSettings.user
+
+## 运行期数据（现场数据，不应提交）
+data/
+*.db
+*.db-shm
+*.db-wal
+
+## 测试产物（coverlet 的覆盖率报告）
+[Tt]est[Rr]esults/
+*.trx
+coverage.*.xml
+coverage.json
+
+## 发布产物
+publish/
+*.nupkg
+
+## 其他
+*.tmp
+Thumbs.db

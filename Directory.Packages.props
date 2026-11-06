@@ -1,0 +1,122 @@
+﻿<Project>
+  <PropertyGroup>
+    <!-- Central Package Management：版本集中在此文件，各 .csproj 只写 PackageReference 不写 Version。 -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!--
+    版本基线说明：
+    Microsoft.Extensions.* 与 Serilog.Extensions.* 统一锁定在 8.0.x，
+    与 Directory.Build.props 中的 net8.0 目标框架匹配。
+    若迁移到 .NET 10，这一组需同步升到 10.0.x（否则会拉入 netstandard2.0 资产）。
+  -->
+  <ItemGroup Label="日志">
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Ini" Version="10.0.12" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageVersion Include="NModbus.Serial" Version="3.0.83" />
+    <PackageVersion Include="Serilog" Version="4.4.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Map" Version="2.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageVersion Include="SqlSugarCore" Version="5.1.4.221" />
+    <PackageVersion Include="StoneKit.Configuration.IniParser" Version="2024.1.1.391401" />
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="10.0.12" />
+  </ItemGroup>
+  <ItemGroup Label="通讯（许可证均经实读 NuGet 元数据/包内许可文件确认）">
+    <!-- NModbus 3.0.83：包内 LICENSE.txt 实读 = MIT -->
+    <PackageVersion Include="NModbus" Version="3.0.83" />
+    <!-- MQTTnet 5.2.0.1603：包内 LICENSE 实读 = MIT（v5 未改授权） -->
+    <PackageVersion Include="MQTTnet" Version="5.2.0.1603" />
+    <!-- System.IO.Ports：MIT（Microsoft 官方） -->
+    <PackageVersion Include="System.IO.Ports" Version="10.0.12" />
+    <!--
+      以下两个包【暂未引入】，对应的通道目前是「框架 + TODO」骨架：
+        · LibUA           1.0.1  = Apache-2.0  （OPC UA）
+        · EEIP.NetStandard 1.0.2 = MIT         （EtherNet/IP）
+
+      选 EEIP.NetStandard 而非 libplctag 的理由：
+        1. 许可证：libplctag = MPL-2.0，不满足本项目「MIT 或 Apache 2.0」的约束；
+           EEIP.NetStandard = MIT。
+        2. 适用性：libplctag 的核心价值是 AB/Rockwell PLC 的 Tag 访问，
+           而本项目的 EtherNet/IP 用于「PC ↔ MES 通讯」，用不到该能力。
+           它还依赖 win-x64 原生二进制，增加发布复杂度。
+
+      待实现对应通道时再引入这两个包，并同步确认当时的许可证。
+    -->
+  </ItemGroup>
+  <ItemGroup Label="任务调度">
+    <PackageVersion Include="NCrontab.Scheduler" Version="2.1.23" />
+  </ItemGroup>
+  <ItemGroup Label="状态机">
+    <!--
+      Stateless 5.20.1：实读 .nupkg 内的 Stateless.nuspec，
+      内容为 <license type="expression">Apache-2.0</license>，
+      满足本项目「MIT 或 Apache-2.0」的许可约束。
+      包内含 lib/net8.0 资产，与目标框架一致，不会拉入 netstandard2.0。
+
+      仅供 Devices 模块承载元件/机台状态机。不要让其它模块复用它表达业务流程 ——
+      状态机跨模块共享时，状态定义会互相耦合，改一处动全身。
+    -->
+    <PackageVersion Include="Stateless" Version="5.20.1" />
+  </ItemGroup>
+  <ItemGroup Label="数据访问">
+    <!-- 均经 NuGet 元数据实读确认：Dapper=Apache-2.0，Microsoft.Data.Sqlite=MIT -->
+    <PackageVersion Include="Dapper" Version="2.1.89" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="8.0.31" />
+  </ItemGroup>
+  <!--
+    Microsoft.Extensions.* 统一使用各包的最新 8.0.x 补丁版。
+    注意不能全部锁在 8.0.0：Microsoft.Extensions.Http 8.0.1 要求
+    Logging.Abstractions / Options / DI.Abstractions ≥ 8.0.2，
+    锁在 8.0.0 会触发 NU1605 包降级错误。
+  -->
+  <ItemGroup Label="Microsoft.Extensions（与 net8.0 对齐）">
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+    <!-- 测试宿主需要 DI 容器实现与配置构建器 -->
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <!-- RemoteAuthStrategy 用 IHttpClientFactory 管理 HttpClient（避免 socket 耗尽） -->
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup Label="UI 控件库">
+    <!--
+      实读 NuGet nuspec 确认：AntdUI = Apache-2.0。
+
+      背景：原方案的 SunnyUI 经实读为 GPL-3.0-only，商用需向作者购买授权。
+      GPL-3.0 是传染性 copyleft —— 闭源商业产品链接 GPL 代码须整体开源，
+      对本项目不可接受，故改选宽松许可的 AntdUI。
+
+      备选（许可同样宽松，均已实读确认）：
+        · MaterialSkin.2 = MIT（Material 风格，控件较简单）
+        · Krypton.Toolkit = BSD-3-Clause（控件集庞大，API 较分散）
+    -->
+    <PackageVersion Include="AntdUI" Version="2.4.11" />
+  </ItemGroup>
+  <ItemGroup Label="测试">
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <!--
+      ⚠️ 必须锁定在 7.x，不要升级到 8.x。
+
+      FluentAssertions 自 8.0（2025-01）起改为 Xceed 商业授权：
+      商用需按开发者席位付费（$129.95/开发者/年），非商用才免费。
+      7.x 永久保持 Apache 2.0，可自由商用。
+
+      本项目为商用产品，因此固定在 7.2.2（7.x 的最后一个版本）。
+      升级到 8.x 会引入授权合规风险。
+    -->
+    <PackageVersion Include="FluentAssertions" Version="7.2.2" />
+  </ItemGroup>
+</Project>

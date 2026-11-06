@@ -1,0 +1,20 @@
+﻿<Solution>
+  <!--
+    新框架（含桌面宿主）的独立解决方案。
+    EquipmentMonitor.slnx 仍包含处于迁移中、当前无法编译的旧模块；
+    本文件是新旧分离期间唯一可信的构建基线。
+  -->
+  <Folder Name="/src/">
+    <Project Path="src/EquipmentMonitor.Common/EquipmentMonitor.Common.csproj" />
+    <Project Path="src/EquipmentMonitor.Core/EquipmentMonitor.Core.csproj" />
+    <Project Path="src/EquipmentMonitor.Infrastructure/EquipmentMonitor.Infrastructure.csproj" />
+    <Project Path="src/EquipmentMonitor.Desktop/EquipmentMonitor.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EquipmentMonitor.AxisFramework.Tests/EquipmentMonitor.AxisFramework.Tests.csproj" />
+    <Project Path="tests/EquipmentMonitor.Desktop.Tests/EquipmentMonitor.Desktop.Tests.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/EquipmentMonitor.AxisAdapter.Sample/EquipmentMonitor.AxisAdapter.Sample.csproj" />
+  </Folder>
+</Solution>

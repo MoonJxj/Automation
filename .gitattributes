@@ -1,0 +1,47 @@
+# 换行符：仓库内统一 LF，Windows 工作区检出 CRLF（与 .editorconfig 一致）
+* text=auto eol=crlf
+
+# 明确文本类型
+*.cs            text diff=csharp
+*.csproj        text
+*.props         text
+*.targets       text
+*.slnx          text
+*.config        text
+*.resx          text
+*.xml           text
+*.md            text
+*.ps1           text
+*.psm1          text
+*.bat           text
+*.cmd           text
+*.txt           text
+*.json          text eol=lf
+*.sh            text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+.gitignore      text eol=crlf
+.gitattributes  text eol=crlf
+.editorconfig   text eol=crlf
+
+# 二进制文件（禁止换行转换 / 合并）
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.bmp   binary
+*.ico   binary
+*.webp  binary
+*.pdf   binary
+*.zip   binary
+*.7z    binary
+*.gz    binary
+*.dll   binary
+*.exe   binary
+*.pdb   binary
+*.xlsx  binary
+*.docx  binary
+*.pptx  binary
+*.db    binary
+*.snk   binary
+*.pfx   binary

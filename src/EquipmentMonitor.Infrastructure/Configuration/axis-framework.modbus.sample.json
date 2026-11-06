@@ -1,0 +1,61 @@
+{
+  "controllers": [
+    {
+      "id": 1,
+      "name": "模拟调试卡",
+      "brand": "Sim",
+      "controllerNo": 0,
+      "connectionType": "PciCard",
+      "isEnabled": true
+    },
+    {
+      "id": 2,
+      "name": "PLC-1",
+      "brand": "Modbus",
+      "controllerNo": 0,
+      "connectionType": "ModbusTcp",
+      "ipAddress": "192.168.1.10",
+      "port": 502,
+      "slaveAddress": 1,
+      "timeoutMs": 1000,
+      "sortOrder": 10,
+      "isEnabled": true
+    }
+  ],
+  "axes": [
+    {
+      "id": 10,
+      "controllerConfigId": 1,
+      "axisNo": 0,
+      "name": "X 轴（模拟）",
+      "unit": "mm",
+      "defaultVelocity": 10.0,
+      "isEnabled": true
+    },
+    {
+      "id": 20,
+      "controllerConfigId": 2,
+      "axisNo": 0,
+      "name": "X 轴（PLC）",
+      "unit": "mm",
+      "stateStartAddress": 100,
+      "commandStartAddress": 200,
+      "executeCoilAddress": 10,
+      "positionScale": 0.001,
+      "velocityScale": 1.0,
+      "torqueScale": 0.1,
+      "accelerationScale": 1.0,
+      "decelerationScale": 1.0,
+      "jerkScale": 1.0,
+      "softLimitMin": -100.0,
+      "softLimitMax": 300.0,
+      "maxVelocity": 100.0,
+      "defaultVelocity": 20.0,
+      "acceleration": 200.0,
+      "deceleration": 200.0,
+      "jerk": 0.0,
+      "homeMethod": 17,
+      "isEnabled": true
+    }
+  ]
+}

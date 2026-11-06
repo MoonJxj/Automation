@@ -1,0 +1,31 @@
+﻿root = true
+
+[*]
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.json]
+charset = utf-8
+end_of_line = lf
+
+[*.sh]
+charset = utf-8
+end_of_line = lf
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+# CS8603: 可能返回 null 引用。
+dotnet_diagnostic.CS8603.severity = warning
+
+# Git 配置文件必须无 BOM（带 BOM 会让首行规则失效）
+[.gitignore]
+charset = utf-8
+end_of_line = crlf
+
+[.gitattributes]
+charset = utf-8
+end_of_line = crlf
